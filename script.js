@@ -1,3 +1,6 @@
+const startHour = 6
+const endHour = 18
+
 document.addEventListener("DOMContentLoaded", (event) => {
   const wrapperDiv = document.getElementById("wrapper");
   const timeDiv = document.getElementById("time");
@@ -5,7 +8,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   const dateDiv = document.getElementById("date");
   setInterval(() => {
     const now = moment();
-    if (now.hour() >= 6 && now.hour() < 18) {
+    if (now.hour() >= 6 && now.hour() < 19) {
       timeDiv.innerHTML = now.format("LT");
       dayDiv.innerHTML = now.format("dddd");
       dateDiv.innerHTML = now.format("MMMM D");
@@ -14,7 +17,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
       dayDiv.innerHTML = "";
       dateDiv.innerHTML = "";
     }
-    const hoursSinceOn = Math.max(now.hour() - 6, 0);
-    wrapperDiv.style.marginLeft = `${(hoursSinceOn / 12) * 12}vw`;
+    const hoursSinceOn = Math.max(now.hour() - startHour, 0);
+    const totalHoursOn = endHour - startHour
+    wrapperDiv.style.marginLeft = `${(hoursSinceOn / totalHoursOn) * totalHoursOn}vw`;
   }, 1000);
 });
